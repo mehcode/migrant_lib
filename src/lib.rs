@@ -233,7 +233,7 @@ lazy_static! {
 pub enum DbKind {
     Sqlite,
     Postgres,
-    MySql,
+    // MySql,
 }
 impl std::str::FromStr for DbKind {
     type Err = Error;
@@ -241,7 +241,7 @@ impl std::str::FromStr for DbKind {
         Ok(match s {
             "sqlite" => DbKind::Sqlite,
             "postgres" => DbKind::Postgres,
-            "mysql" => DbKind::MySql,
+            // "mysql" => DbKind::MySql,
             _ => bail_fmt!(ErrorKind::InvalidDbKind, "Invalid Database Kind: {}", s),
         })
     }
@@ -255,9 +255,9 @@ impl fmt::Display for DbKind {
             DbKind::Sqlite => {
                 write!(f, "sqlite")
             }
-            DbKind::MySql => {
-                write!(f, "mysql")
-            }
+            // DbKind::MySql => {
+            //     write!(f, "mysql")
+            // }
         }
     }
 }
@@ -721,17 +721,17 @@ pub fn shell(config: &Config) -> Result<()> {
                                               "Error running command `psql`. Is it available on your PATH?"))?
                     .wait()?;
         }
-        DbKind::MySql => {
-            let conn_str = config.connect_string()?;
-            Command::new("mysqlsh")
-                    .arg("--sql")
-                    .arg("--uri")
-                    .arg(conn_str)
-                    .spawn()
-                    .chain_err(|| format_err!(ErrorKind::ShellCommand,
-                                              "Error running command `mysqhlsh`. Is it available on your PATH?"))?
-                    .wait()?;
-        }
+        // DbKind::MySql => {
+        //     let conn_str = config.connect_string()?;
+        //     Command::new("mysqlsh")
+        //             .arg("--sql")
+        //             .arg("--uri")
+        //             .arg(conn_str)
+        //             .spawn()
+        //             .chain_err(|| format_err!(ErrorKind::ShellCommand,
+        //                                       "Error running command `mysqhlsh`. Is it available on your PATH?"))?
+        //             .wait()?;
+        // }
     })
 }
 

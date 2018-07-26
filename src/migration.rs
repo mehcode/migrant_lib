@@ -92,10 +92,10 @@ impl Migratable for FileMigration {
                     let conn_str = config.connect_string()?;
                     drivers::pg::run_migration(&conn_str, up)?;
                 }
-                DbKind::MySql => {
-                    let conn_str = config.connect_string()?;
-                    drivers::mysql::run_migration(&conn_str, up)?;
-                }
+                // DbKind::MySql => {
+                //     let conn_str = config.connect_string()?;
+                //     drivers::mysql::run_migration(&conn_str, up)?;
+                // }
             }
         } else {
             print_flush!("(empty) ...");
@@ -113,10 +113,10 @@ impl Migratable for FileMigration {
                     let conn_str = config.connect_string()?;
                     drivers::pg::run_migration(&conn_str, down)?;
                 }
-                DbKind::MySql => {
-                    let conn_str = config.connect_string()?;
-                    drivers::mysql::run_migration(&conn_str, down)?;
-                }
+                // DbKind::MySql => {
+                //     let conn_str = config.connect_string()?;
+                //     drivers::mysql::run_migration(&conn_str, down)?;
+                // }
             }
         } else {
             print_flush!("(empty) ...");
@@ -236,10 +236,10 @@ impl Migratable for EmbeddedMigration {
                     let conn_str = _config.connect_string()?;
                     drivers::pg::run_migration_str(&conn_str, _up)?;
                 }
-                DbKind::MySql => {
-                    let conn_str = _config.connect_string()?;
-                    drivers::mysql::run_migration_str(&conn_str, _up)?;
-                }
+                // DbKind::MySql => {
+                //     let conn_str = _config.connect_string()?;
+                //     drivers::mysql::run_migration_str(&conn_str, _up)?;
+                // }
             }
             #[cfg(not(any(feature="d-postgres", feature="d-sqlite", feature="d-mysql")))]
             panic!("** Migrant ERROR: Database specific feature required to run embedded-file migration **");
@@ -259,10 +259,10 @@ impl Migratable for EmbeddedMigration {
                     let conn_str = config.connect_string()?;
                     drivers::pg::run_migration_str(&conn_str, down)?;
                 }
-                DbKind::MySql => {
-                    let conn_str = config.connect_string()?;
-                    drivers::mysql::run_migration_str(&conn_str, down)?;
-                }
+                // DbKind::MySql => {
+                //     let conn_str = config.connect_string()?;
+                //     drivers::mysql::run_migration_str(&conn_str, down)?;
+                // }
             }
         } else {
             print_flush!("(empty) ...");

@@ -33,16 +33,16 @@ mod sql {
         pub static PG_DELETE_MIGRATION: &'static str = "prepare stmt as delete from __migrant_migrations where tag = $1; execute stmt('__VAL__'); deallocate stmt;";
     }
 
-    #[cfg(not(feature="d-mysql"))]
-    pub use self::q_mysql::*;
-    #[cfg(not(feature="d-mysql"))]
-    mod q_mysql {
-        pub static MYSQL_ADD_MIGRATION: &'static str = "prepare stmt from 'insert into __migrant_migrations (tag) values (?)'; set @a = '__VAL__'; execute stmt using @a; deallocate prepare stmt;";
-        pub static MYSQL_DELETE_MIGRATION: &'static str = "prepare stmt from 'delete from __migrant_migrations where tag = ?'; set @a = '__VAL__'; execute stmt using @a; deallocate prepare stmt;";
-    }
+    // #[cfg(not(feature="d-mysql"))]
+    // pub use self::q_mysql::*;
+    // #[cfg(not(feature="d-mysql"))]
+    // mod q_mysql {
+    //     pub static MYSQL_ADD_MIGRATION: &'static str = "prepare stmt from 'insert into __migrant_migrations (tag) values (?)'; set @a = '__VAL__'; execute stmt using @a; deallocate prepare stmt;";
+    //     pub static MYSQL_DELETE_MIGRATION: &'static str = "prepare stmt from 'delete from __migrant_migrations where tag = ?'; set @a = '__VAL__'; execute stmt using @a; deallocate prepare stmt;";
+    // }
 }
 
 pub mod pg;
 pub mod sqlite;
-pub mod mysql;
+// pub mod mysql;
 
